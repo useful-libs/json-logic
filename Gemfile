@@ -8,6 +8,7 @@ gemspec
 gem 'activesupport'
 
 group 'development' do
+  gem 'code-scanning-rubocop'
   gem 'rubocop'
   gem 'rubocop-rspec'
 end
