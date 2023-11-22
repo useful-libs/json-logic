@@ -8,7 +8,7 @@ gemspec
 gem 'activesupport'
 
 group 'development' do
-  gem 'code-scanning-rubocop'
+  gem "code-scanning-rubocop", "= 0.3.0"
   gem 'rubocop'
   gem 'rubocop-rspec'
 end
