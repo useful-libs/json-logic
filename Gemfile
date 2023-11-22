@@ -8,8 +8,8 @@ gemspec
 gem 'activesupport'
 
 group 'development' do
-  # gem 'rubocop', '~> 1.57'
-  # gem 'rubocop-rspec'
+  gem 'rubocop', '~> 1.57'
+  gem 'rubocop-rspec'
 end
 
 group :test do
