@@ -12,7 +12,7 @@ jobs:
         id: release
         with:
           release-type: ruby
-          package-name: contrived_math
+          package-name: json_logic_ruby
           bump-minor-pre-major: true
           version-file: "lib/json_logic/version.rb"
       # Checkout code if release was created
