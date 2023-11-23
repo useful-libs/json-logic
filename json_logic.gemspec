@@ -9,6 +9,8 @@ Gem::Specification.new do |spec|
 
   spec.summary = 'Build complex rules, serialize them as JSON, and execute them in ruby.'
   spec.description = 'Build complex rules, serialize them as JSON, and execute them in ruby. See https://jsonlogic.com'
+  spec.homepage = 'https://github.com/useful-libs/json_logic'
+
   spec.license = 'MIT'
   spec.required_ruby_version = '>= 3.2.0'
 
