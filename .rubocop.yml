@@ -1,0 +1,20 @@
+require:
+  - rubocop-rspec
+
+AllCops:
+  SuggestExtensions: true
+  NewCops: enable
+
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/**/*'
+Style/Documentation:
+  Enabled: false
+
+# RSpec cops
+RSpec/MultipleExpectations:
+  Enabled: false
+RSpec/ExampleLength:
+  Enabled: false
+RSpec/NestedGroups:
+  Enabled: false
