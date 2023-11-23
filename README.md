@@ -1,7 +1,6 @@
 # JsonLogic
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. 
-Put your Ruby code in the file `lib/json_logic`. To experiment with that code, run `bin/console` for an interactive prompt.
+Build rules and execute them in ruby. See https://jsonlogic.com
 
 
 ## Installation
@@ -15,39 +14,43 @@ If bundler is not being used to manage dependencies, install the gem by executin
     $ gem install json_logic
 
 ## Usage
+#### Run json-logic:
+
 ```ruby
 RULE = <<~JSON
   { "and" : [
-      {">=" : [ { "var" : "age" }, 50 ]},
-      {">=" : [ { "var" : "bmi" }, 50 ]}
+      {">=" : [ { "var" : "length" }, 15 ]},
+      {">=" : [ { "var" : "size" }, 50 ]}
     ] }
 JSON
 
-DATA = JSON.parse('{ "age" : 51, "bmi" : 49}')
+DATA = JSON.parse('{ "length": 20, "size": 49 }')
 
 logic = JsonLogic::Evaluator.new
-res = logic.apply(JSON.parse(RULE), DATA)
-puts "Criteria eligible: #{res}"
+logic.apply(JSON.parse(RULE), DATA)
+```
+##### Get all variables used in a rule
 
-# extract all variables used in criteria
+```ruby
+logic = JsonLogic::Evaluator.new
 res = logic.extract_vars(JSON.parse(RULE))
-puts "Variables used in criteria: #{res}"
+puts res
 
-# will print
-# 
-# Variables used in criteria: ["age", "bmi"]
+# will print -> ["length", "size"]
+```
 
-# output report of all operations
+##### Track report of all operations
+```ruby
+logic = JsonLogic::Evaluator.new
+logic.apply(JSON.parse(RULE), DATA)
+
 puts logic.tracker.report
 
 # will print
-#
-# Criteria eligible: false
 # LOGIC: 'and', RESULT = false
-#   DATA: 'age' data:51 >= expected:50,  RESULT = true
-#   DATA: 'bmi' data:49 >= expected:50,  RESULT = false
+#   DATA: 'length' data:20 >= expected:15,  RESULT = true
+#   DATA: 'size' data:49 >= expected:50,  RESULT = false
 ```
-
 
 
 ## Development
@@ -58,7 +61,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/json-logic. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/[USERNAME]/json-logic/blob/master/CODE_OF_CONDUCT.md).
+Bug reports and pull requests are welcome on GitHub at https://github.com/useful-libs/json-logic. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/useful-libs/json-logic/blob/main/CODE_OF_CONDUCT.md).
 
 ## License
 
@@ -66,4 +69,4 @@ The gem is available as open source under the terms of the [MIT License](https:/
 
 ## Code of Conduct
 
-Everyone interacting in the Json::Logic project's codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/[USERNAME]/json-logic/blob/master/CODE_OF_CONDUCT.md).
+Everyone interacting in the Json::Logic project's codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/useful-libs/json-logic/blob/master/CODE_OF_CONDUCT.md).
