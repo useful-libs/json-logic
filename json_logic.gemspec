@@ -3,7 +3,7 @@
 require_relative 'lib/json_logic/version'
 
 Gem::Specification.new do |spec|
-  spec.name = 'json_logic'
+  spec.name = 'json_logic_ruby'
   spec.version = JsonLogic::VERSION
   spec.authors = ['Volodymyr Stashchenko', 'Andriy Savka']
 

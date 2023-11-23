@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    json_logic (0.1.0)
+    json_logic_ruby (0.1.0)
       activesupport
 
 GEM
@@ -85,7 +85,7 @@ PLATFORMS
 
 DEPENDENCIES
   activesupport
-  json_logic!
+  json_logic_ruby!
   rspec
   rubocop (~> 1.57)
   rubocop-rspec
