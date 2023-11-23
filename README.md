@@ -16,21 +16,21 @@ If bundler is not being used to manage dependencies, install the gem by executin
 
 ## Usage
 ```ruby
-CRITERIA = <<~JSON
+RULE = <<~JSON
   { "and" : [
       {">=" : [ { "var" : "age" }, 50 ]},
       {">=" : [ { "var" : "bmi" }, 50 ]}
     ] }
 JSON
 
-DATA = Oj.load('{ "age" : 51, "bmi" : 49}')
+DATA = JSON.parse('{ "age" : 51, "bmi" : 49}')
 
 logic = JsonLogic::Evaluator.new
-res = logic.apply(Oj.load(CRITERIA), DATA)
+res = logic.apply(JSON.parse(RULE), DATA)
 puts "Criteria eligible: #{res}"
 
 # extract all variables used in criteria
-res = logic.extract_vars(Oj.load(CRITERIA))
+res = logic.extract_vars(JSON.parse(RULE))
 puts "Variables used in criteria: #{res}"
 
 # will print
