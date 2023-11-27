@@ -4,6 +4,7 @@ require:
 AllCops:
   SuggestExtensions: true
   NewCops: enable
+  TargetRubyVersion: 3.2
 
 Metrics/BlockLength:
   Exclude:
