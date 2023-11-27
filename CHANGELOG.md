@@ -1,5 +1,13 @@
 # Changelog
 
+### [0.2.2](https://www.github.com/useful-libs/json_logic_ruby/compare/v0.2.1...v0.2.2) (2023-11-27)
+
+
+### Bug Fixes
+
+* release 0.2.1 ([cfcd782](https://www.github.com/useful-libs/json_logic_ruby/commit/cfcd782631905b19eb1918353b3887178f087ee7))
+* release 0.2.1 ([336dcac](https://www.github.com/useful-libs/json_logic_ruby/commit/336dcacfaf4c13602fe35a6b346046a003ba1042))
+
 ## 0.1.0 (2023-11-23)
  * Initial release
 ## 0.2.1 (2023-11-23)
