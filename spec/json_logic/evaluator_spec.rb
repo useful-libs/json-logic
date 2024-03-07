@@ -196,7 +196,7 @@ RSpec.describe JsonLogic::Evaluator do
         let(:data) { { 'a' => true } }
         let(:var_name) { 'a' }
 
-        it { is_expected.to be_truthy }
+        it { is_expected.to be(true) }
       end
 
       context 'when value is false' do
