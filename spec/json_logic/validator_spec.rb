@@ -16,6 +16,12 @@ RSpec.describe JsonLogic::Validator do
       it { is_expected.to be_truthy }
     end
 
+    context 'when valid operator with false' do
+      let(:rules) { { 'and' => [{ '==' => [{ 'var' => 'green_card' }, false] }] } }
+
+      it { is_expected.to be_truthy }
+    end
+
     context 'when valid operator with hash' do
       let(:rules) { { '==' => [{ 'var' => 'temp' }, { 'x' => 'y' }] } }
 

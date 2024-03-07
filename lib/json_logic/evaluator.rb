@@ -96,7 +96,7 @@ module JsonLogic
       end
 
       if rules.is_a?(Hash)
-        rules.each { |_, rule| fetch_var_values(rule, var_name, values) }
+        rules.each_value { |rule| fetch_var_values(rule, var_name, values) }
         return values
       end
 
@@ -134,7 +134,7 @@ module JsonLogic
       rescue TypeError
         data = data[key.to_i]
       end
-      data || default_value
+      data.nil? ? default_value : data
     end
 
     # This method retrieves the variable name from a hash of rules based on the given operator.
