@@ -191,6 +191,20 @@ RSpec.describe JsonLogic::Evaluator do
 
         it { is_expected.to be_nil }
       end
+
+      context 'when value is true' do
+        let(:data) { { 'a' => true } }
+        let(:var_name) { 'a' }
+
+        it { is_expected.to be_truthy }
+      end
+
+      context 'when value is false' do
+        let(:data) { { 'a' => false } }
+        let(:var_name) { 'a' }
+
+        it { is_expected.to be(false) }
+      end
     end
 
     context 'when data is array' do
