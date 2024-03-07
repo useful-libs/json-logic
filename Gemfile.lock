@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    json_logic_ruby (0.2.2)
+    json_logic_ruby (0.2.3)
       activesupport (~> 7.0)
 
 GEM
