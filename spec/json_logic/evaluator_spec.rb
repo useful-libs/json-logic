@@ -152,6 +152,24 @@ RSpec.describe JsonLogic::Evaluator do
 
       it { is_expected.to eq(result) }
     end
+
+    context 'when not(!)' do
+      let(:rules) do
+        { '!' => { '<=' => [70, { 'var' => 'age' }, 75] } }
+      end
+
+      context 'when age is not in range' do
+        let(:data) { { 'age' => 50 } }
+
+        it { is_expected.to be(true) }
+      end
+
+      context 'when age is in range' do
+        let(:data) { { 'age' => 70 } }
+
+        it { is_expected.to be(false) }
+      end
+    end
   end
 
   describe '#get_var_name' do
@@ -308,7 +326,7 @@ RSpec.describe JsonLogic::Evaluator do
   end
 
   describe '#fetch_var_values' do
-    subject { described_class.new.send(:fetch_var_values, rules, var_name) }
+    subject { described_class.new.fetch_var_values(rules, var_name) }
 
     context 'when variable present' do
       let(:rules) do
