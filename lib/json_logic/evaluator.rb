@@ -21,6 +21,7 @@ module JsonLogic
       when 'missing' then missing(data, *values)
       when 'missing_some' then missing_some(data, *values)
       when 'map' then json_logic_map(data, *rules[operator])
+      when '!' then !apply(rules[operator], data)
       else
         raise("Unrecognized operation #{operator}") unless OPERATIONS.key?(operator)
 
