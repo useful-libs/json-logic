@@ -1,5 +1,12 @@
 # Changelog
 
+### [0.2.4](https://www.github.com/useful-libs/json_logic_ruby/compare/v0.2.3...v0.2.4) (2024-03-14)
+
+
+### Bug Fixes
+
+* Add support of complex not (!) operator ([#18](https://www.github.com/useful-libs/json_logic_ruby/issues/18)) ([b30270c](https://www.github.com/useful-libs/json_logic_ruby/commit/b30270cf6890e4d69f144705e4cc8487fc61812f))
+
 ### [0.2.3](https://www.github.com/useful-libs/json_logic_ruby/compare/v0.2.2...v0.2.3) (2024-03-07)
 
 
