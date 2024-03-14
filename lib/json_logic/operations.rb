@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 module JsonLogic
-  COMPLEX_OPERATORS = %w[and or if].freeze
-
   OPERATIONS = {
     '==' => ->(a, b) { a == b },
     '!=' => ->(a, b) { a != b },

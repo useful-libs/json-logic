@@ -5,12 +5,12 @@ module JsonLogic
     include Trackable
 
     def apply(rules, data = {})
+      return rules.map { |val| apply(val, data) } if rules.is_a?(Array)
       return rules unless rules.is_a?(Hash)
 
       operator = rules.keys[0]
       init_tracker(operator)
-
-      values = operator == 'map' ? [] : Array(rules[operator]).map { |rule| apply(rule, data) }
+      values = operator == 'map' ? [] :  apply(rules[operator], data)
 
       operators(operator, values, rules, data)
     end
@@ -117,9 +117,7 @@ module JsonLogic
 
     def execute_operation(operator, rules, data, *)
       result = OPERATIONS[operator].call(*)
-      var_name = get_var_name(operator, rules)
-
-      commit_rule_result!(var_name, operator, data, rules, result)
+      commit_rule_result!(operator, data, rules, result)
     end
 
     # This method retrieves the value of a variable with a given name from the data structure.
@@ -135,22 +133,6 @@ module JsonLogic
         data = data[key.to_i]
       end
       data.nil? ? default_value : data
-    end
-
-    # This method retrieves the variable name from a hash of rules based on the given operator.
-    #   { "<=" : [ 25, { "var": "age" }, 75] }
-    #   { "<=" : [ { "var" : "age" }, 20 ] }
-    #
-    # @param operator [String] The operator for which to retrieve the variable name.
-    # @param rules [Hash] A hash containing rule data.
-    # @return [String, nil] The variable name if found, otherwise nil.
-
-    def get_var_name(operator, rules)
-      args = rules[operator]
-      index = COMPLEX_OPERATORS.exclude?(operator) && args.length == 3 ? 1 : 0
-      args.dig(index, 'var')
-    rescue TypeError
-      nil
     end
 
     def missing(data, *args)

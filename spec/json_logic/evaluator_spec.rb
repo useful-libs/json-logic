@@ -2,7 +2,9 @@
 
 RSpec.describe JsonLogic::Evaluator do
   describe '#apply' do
-    subject(:evaluator) { described_class.new.apply(rules, data) }
+    subject(:evaluator) { logic.apply(rules, data) }
+
+    let(:logic) { described_class.new }
 
     context 'with var' do
       let(:rules) { { 'var' => var } }
@@ -151,6 +153,122 @@ RSpec.describe JsonLogic::Evaluator do
       end
 
       it { is_expected.to eq(result) }
+    end
+
+    context 'when not(!)' do
+      context 'when not between' do
+        let(:rules) { { '!' => { '<=' => [70, { 'var' => 'age' }, 75] } } }
+
+        context 'when main part is false' do
+          let(:data) { { 'age' => 69 } }
+
+          it 'returns and tracks true' do
+            expect(evaluator).to be(true)
+            expect(logic.tracker.result).to be(true)
+          end
+        end
+
+        context 'when main part is true' do
+          let(:data) { { 'age' => 72 } }
+
+          it 'returns and tracks false' do
+            expect(evaluator).to be(false)
+            expect(logic.tracker.result).to be(false)
+          end
+        end
+      end
+
+      context 'when not one of (select not any in)' do
+        context 'with string' do
+          let(:rules) { { '!' => { 'in' => [{ 'var' => 'drink' }, 'sell cola'] } } }
+
+          context 'when main part is false' do
+            let(:data) { { 'drink' => 'beer' } }
+
+            it 'returns and tracks true' do
+              expect(evaluator).to be(true)
+              expect(logic.tracker.result).to be(true)
+            end
+          end
+
+          context 'when main part is true' do
+            let(:data) { { 'drink' => 'cola' } }
+
+            it 'returns and tracks false' do
+              expect(evaluator).to be(false)
+              expect(logic.tracker.result).to be(false)
+            end
+          end
+        end
+
+        context 'with array' do
+          let(:rules) { { '!' => { 'in' => [{ 'var' => 'drink' }, %w[cola juice]] } } }
+
+          context 'when main part is false' do
+            let(:data) { { 'drink' => 'beer' } }
+
+            it 'returns and tracks true' do
+              expect(evaluator).to be(true)
+              expect(logic.tracker.result).to be(true)
+            end
+          end
+
+          context 'when main part is true' do
+            let(:data) { { 'drink' => 'cola' } }
+
+            it 'returns and tracks false' do
+              expect(evaluator).to be(false)
+              expect(logic.tracker.result).to be(false)
+            end
+          end
+        end
+      end
+
+      context 'when does not contain any of (not like)' do
+        context 'with string' do
+          let(:rules) { { '!' => { 'in' => ['ol', { 'var' => 'drink' }] } } }
+
+          context 'when main part is false' do
+            let(:data) { { 'drink' => 'juice' } }
+
+            it 'returns and tracks true' do
+              expect(evaluator).to be(true)
+              expect(logic.tracker.result).to be(true)
+            end
+          end
+
+          context 'when main part is true' do
+            let(:data) { { 'drink' => 'cola' } }
+
+            it 'returns and tracks false' do
+              expect(evaluator).to be(false)
+              expect(logic.tracker.result).to be(false)
+            end
+          end
+        end
+
+        context 'with array' do
+          let(:rules) { { '!' => { 'in' => ['beer', { 'var' => 'drinks' }] } } }
+
+          context 'when main part is false' do
+            let(:data) { { 'drinks' => %w[cola juice] } }
+
+            it 'returns and tracks true' do
+              expect(evaluator).to be(true)
+              expect(logic.tracker.result).to be(true)
+            end
+          end
+
+          context 'when main part is true' do
+            let(:data) { { 'drinks' => %w[beer cola] } }
+
+            it 'returns and tracks false' do
+              expect(evaluator).to be(false)
+              expect(logic.tracker.result).to be(false)
+            end
+          end
+        end
+      end
     end
   end
 
@@ -308,7 +426,7 @@ RSpec.describe JsonLogic::Evaluator do
   end
 
   describe '#fetch_var_values' do
-    subject { described_class.new.send(:fetch_var_values, rules, var_name) }
+    subject { described_class.new.fetch_var_values(rules, var_name) }
 
     context 'when variable present' do
       let(:rules) do
