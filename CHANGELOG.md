@@ -13,6 +13,7 @@
 ### Bug Fixes
 
 * add bump-version instruction ([#16](https://www.github.com/useful-libs/json_logic_ruby/issues/16)) ([cd42ab7](https://www.github.com/useful-libs/json_logic_ruby/commit/cd42ab70444be8d2b9837b7694fd8a9d4c3177b3))
+* Fix: bug when boolean false was extracted from var as nil ([#11](https://github.com/useful-libs/json_logic_ruby/pull/11)) ([26a1d4e](https://github.com/useful-libs/json_logic_ruby/commit/8b37a4e3b4c50e6265bdf9d6f37ceb2fe26a1d4e))
 
 ## [0.2.1](https://github.com/useful-libs/json_logic_ruby/releases/tag/v0.2.1) (2023-11-23)
 ### Bug Fixes
